@@ -114,13 +114,13 @@ class BetterBST(BinarySearchTree[K, I]):
             ArrayList[Tuple[K, I]]: An ArrayList of tuples containing Key,Item pairs that match the filter.
 
         Complexity:
-            Best Case Complexity: O(log n * (filter_func1 + filter_func2))，平衡树且大部分节点不满足条件
-            Worst Case Complexity: O(n * (filter_func1 + filter_func2))，需要检查所有节点
+            Best Case Complexity: O(log n * (filter_func1 + filter_func2))，Balance the tree and most of the nodes do not meet the conditions
+            Worst Case Complexity: O(n * (filter_func1 + filter_func2))，All nodes need to be checked
 
         Justification:
-            在最好情况下，我们可以跳过大部分子树，仅检查 O(log n) 个节点
-            在最坏情况下，我们需要检查所有 n 个节点
-            对每个节点，我们应用两个过滤函数，复杂度为 O(filter_func1 + filter_func2)
+            In the best case, we can skip most of the subtrees and only check for O(log n) nodes
+            In the worst-case scenario, we need to check all n nodes
+            For each node, we apply two filter functions with a complexity of O(filter_func1 + filter_func2)
         """
         result = ArrayList(0)
 
