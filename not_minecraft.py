@@ -17,11 +17,12 @@ class NotMinecraft:
             checklist: Represents an object that is a list of miners.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
 
         Justification:
-            TODO
+            The initialization method simply assigns the parameters to instance variables, which are constant time assignment operations without any loops or recursion.
+            Therefore, regardless of the size of the input cave_system and checklist, the execution time is constant.
         """
         self.miner = Miner("Steve")
         self.cave_system = cave_system
@@ -104,7 +105,8 @@ class NotMinecraft:
             Worst Case Complexity: O(n)
 
         Justification:
-            The method calls dfs_explore_cave() and objective_mining_filter(), the former with a complexity that is not taken into account, and the latter which has a complexity of O(n). In objective_mining_filter(), all the squares need to be traversed to check their value/hardness ratio, which requires the time complexity of O(n), where n is the length of the list of blocks.
+            The method calls dfs_explore_cave() and objective_mining_filter(), the former with a complexity that is not taken into account, and the latter which has a complexity of O(n).
+            In objective_mining_filter(), all the squares need to be traversed to check their value/hardness ratio, which requires the time complexity of O(n), where n is the length of the list of blocks.
         """
         # If no list of blocks is provided, DFS is performed to explore the cave
         if blocks is None:
@@ -124,18 +126,18 @@ class NotMinecraft:
 
     def objective_mining(self, blocks: ArrayList[MinecraftBlock]) -> None:
         """
-        Mines the cave system casually.
+        Mines the blocks in the provided list according to their value-to-hardness ratio (highest to lowest).
 
         Args:
             blocks (ArrayList[MinecraftBlock]): The list of blocks to mine.
-            time_in_seconds (int): The time in seconds to mine.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(n log n)
+            Worst Case Complexity: O(n log n)
 
         Justification:
-            TODO
+            The main operation is sorting the blocks by their value-to-hardness ratio, which uses mergesort with O(n log n) complexity.
+            The subsequent mining operation is O(n) since each block is processed exactly once.
         """
         # Create a tuple list containing the squares and their ratios
         block_ratios = ArrayList(0)
@@ -154,7 +156,7 @@ class NotMinecraft:
         # Create a new class that wraps the ArrayStack to support index access
         class IndexableStack(ArrayStack):
             def __getitem__(self, index):
-                items = []
+                items = ArrayList(len(self))
                 temp_stack = ArrayStack(len(self))
 
                 # Ejects items from the original stack into the temporary stack (the order is reversed)
@@ -228,17 +230,12 @@ class NotMinecraft:
 
         Complexity:
             Not required
-
-        Sample Usage:
-            not_minecraft = NotMinecraft(cave_system, checklist)
-            not_minecraft.main(1, block1=block1, block2=block2)
-            not_minecraft.main(2, time_in_seconds=60)
         """
 
         # Create an indexable stack to replace the original stack
         class IndexableStack(ArrayStack):
             def __getitem__(self, index):
-                items = []
+                items = ArrayList(len(self))
                 temp_stack = ArrayStack(len(self))
                 # Ejects items from the original stack into the temporary stack (the order is reversed)
                 while not self.is_empty():
